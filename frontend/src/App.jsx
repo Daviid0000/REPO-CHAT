@@ -51,22 +51,22 @@ function App() {
 
   return (
     <>
-      <Mapa />
+      <Mapa/>
 
-      <div className='container col-md-5 col-lg-4 order-md-last mb-4' >
-        <div className='d-flex flex-column  align-items-center' style={{border:'1px solid black', marginBottom: '50px'}}>
-
+      <div className='container col-md-5 col-lg-4 order-md-last' >
+        <div className='d-flex flex-column align-items-center' style={{color:'yellow'}}>
+        
           <form onSubmit={handleSubmit}   //  'onSubmit' es para escuchar el evento del envio del formulario a través de una función en este caso la función se llama 'handleSubmit' 
-            className='container col-md-5 order-md-last text-warning'>
-            <div className=''>
-              <h1>tuRemo</h1>
+            className='container mx-1 col-md-5 order-md-last text-warning d-flex flex-column overflow-y-auto' style={{border:'1px solid yellow',width: '300px', height: '175px', zIndex:'2'}}>
+          
+              
 
               {/*  // Se crea una lista de mensajes para mostrarlos por pantalla y no solo en consola */}
 
-              <ul className='list-unstyled d-inline-block'>
+              <ul className='m-0 p-0'>
                 {
                   messages.map((message, i) => (    // Cuando el <ul> se cree, esta función recorrerá la lista de mensajes y por cada mensaje que recorra se creará un <li>, este mismo contendrá el mensaje que se acaba de enviar
-                  <li key={i} className={`d-flex flex-column m-2 form-control ${message.from === 'Me' ? 'text-right' : ''} ${message.from === 'Me' ? 'bg-warning-subtle text-emphasis-warning ml-auto' : 'bg-success-subtle'}`}>
+                  <li key={i} className={`d-flex flex-column m-2 form-control d-inline-block ${message.from === 'Me'} ${message.from === 'Me' ? ' bg-warning-subtle text-emphasis-warning me-auto border-bottom' : ' bg-success-subtle ms-auto'}`}>
                   
                       <span className='text-md text-slate-700 block'>{message.from}</span>  {/* Recibe un  */}
                       <span className='text-xl'>{message.body}</span>                       {/* arreglo de objetos */}
@@ -78,19 +78,21 @@ function App() {
               </ul>
 
 
-              <input className='form-control' type="text" placeholder='Write your message ...'
+              <input className='form-control border border-warning d-block position' type="text" placeholder='Write your message ...'
                 onChange={(e) => setMessage(e.target.value)} />   {/* 'onChange' permite capturar los cambios dentro del input y actualizar el valor que posee el mismo. */}
               {/* se recibe la información de este evento y desde el mismo evento se actualiza la variable 'message' con la función 'setMessage' mediante el metodo de 'target.value' */}
 
 
-              <button className='m-2 btn btn-outline-light text-white'>
+              <button className='m-2 btn btn-outline-light text-warning border border-warning'>
                 Send
               </button>
 
-            </div>
+            
           </form>
         </div>
       </div>
+
+      <Footer/>
     </>
   );
 }
