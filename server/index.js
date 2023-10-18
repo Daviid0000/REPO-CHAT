@@ -1,30 +1,31 @@
 import express from 'express'
 
-//1.Se importa un servidor http de node
-import http from 'http'
 
-//2. Se importa socket.io y se extrae la clase Server(Servidor de web socket) y renombrando a gusto el nombre que tiene
+import http from 'http'     //  Se importa un servidor http de node
+
+//  Se importa socket.io y se extrae la clase 'Server'(Servidor de web socket) renombrando a gusto el nombre que tiene
 import {Server as SocketServer} from 'socket.io'
 
-//Servidor http
 const app = express()
 
-//3. creamos un servidor básico con http
-const server = http.createServer(app)
+const server = http.createServer(app)   // Se crea un servidor básico pasandole 'app' 
 
-//Servidor web socket
-//4. Pasamos a socket.io el servidor creado anteriormente
-const io = new SocketServer(server)
 
-//12. Cuando un cliente se conecte muestra el id por consola
-io.on('connection', socket => {
-    console.log(socket.id)
+const io = new SocketServer(server)     // Se pasa a 'socket.io' el servidor creado anteriormente para crear un servidor de web socket
 
-    socket.on('message', (body)=>{
+
+io.on('connection', socket => {           // El servidor escucha cuando un cliente se conecta al servidor
+    console.log(socket.id)               // Cuando un cliente se conecte muestra el id por consola
+
+                                         // Este 'message' es un evento que el backend esta escuchando de lo viene desde el frontend
+    socket.on('message', (body) => {    // El servidor escucha al cliente cuando este envía eventos
         console.log(body)
-        socket.broadcast.emit('message', {
-            body,
-            from: socket.id.slice(6)
+
+        socket.broadcast.emit('message', {  // Este es el método del cliente que emite el mensaje a todos usuarios conectados en el chat a excepción de el mismo
+                                           // Este 'message' es un evento que el backend envía al frontend
+
+            body,                        // A través de este objeto se envía el mensaje y el id de quién lo envía
+            from: socket.id.slice(5)     
         })
     })
 })
