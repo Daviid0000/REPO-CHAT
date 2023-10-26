@@ -1,6 +1,6 @@
 import mapaSVG from '../assets/formosa.svg'
-import { NavBar } from './navbar'
-import { Footer } from './footer'
+import { NavBar } from '../components/navbar'
+import { Footer } from '../components/footer'
 
 
 
@@ -21,7 +21,7 @@ export const InicioUser = () => {
                 placeholder="¿Dónde quieres ir?"/>
                 <div id="map"></div>
 
-                <div className='d-flex' style={{ justifyContent: 'center' }}>
+                <div className='d-flex justify-content-center'>
                     <button style={{ display: "block" }} type="button" className="btn btn-warning m-2 text-light">Pedir remis</button>
                 </div>
             </form>

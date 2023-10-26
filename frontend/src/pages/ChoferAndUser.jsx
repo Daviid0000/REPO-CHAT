@@ -1,14 +1,14 @@
 import io from 'socket.io-client'   // Modulo de socket.io enfocado en aplicaciones de navegador
 import { useState, useEffect } from 'react'   // Para crear estados
-import { Mapa } from './mapa';
-import { Footer } from './footer.jsx';
+import { Mapa } from '../components/mapa';
+import { Footer } from '../components/footer.jsx';
 
 // Conexión con el backend
 const socket = io("/")    // Este socket permite recibir información del backend
 
 
 
- function App() {
+ function ChoferAndUser() {
   const [message, setMessage] = useState('');   // 'message' es una variable, mientras que 'setMessage' es una función para ir actulizando esta variable de nombre 'message'
   const [messages, setMessages] = useState([]);
 
@@ -99,4 +99,4 @@ const socket = io("/")    // Este socket permite recibir información del backen
 
 
 
-export default App
+export default ChoferAndUser

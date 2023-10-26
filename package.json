@@ -18,7 +18,8 @@
     "path": "^0.12.7",
     "pnpm": "^8.8.0",
     "sequelize": "^6.33.0",
-    "socket.io": "^4.7.2"
+    "socket.io": "^4.7.2",
+    "sweetalert2": "^11.7.32"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
