@@ -20,13 +20,8 @@ export const Index = () => {
                         <h1 className="display-1">tuRemo</h1>
                         <h3 className="display-6">¿Necesitas un remis?</h3>
 
-                        <h3 id="demo" onclick="myFunction()">Click me to change my color.</h3>
 
-                        <script>{
-                        function myFunction() {
-                        document.getElementById("#demo").style.color = "red"}}
-                        </script>
-
+                        
                         <a className="btn btn-warning text-light" href="/empresa" type="button">Pedir Aquí</a>
                     </div>
                 </div>

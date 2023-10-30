@@ -1,36 +1,108 @@
-import mapaSVG from '../assets/formosa.svg'
-import { NavBar } from '../components/navbar'
-import { Footer } from '../components/footer'
-
-
+import mapaSVG from "../assets/formosa.svg";
+import { NavBar } from "../components/navbar";
+import { Footer } from "../components/footer";
 
 export const InicioUser = () => {
+    var map;
+var markers = [];
+
+
+     function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: 0, lng: 0 },
+            zoom: 2
+        });
+    
+        directionsService = new google.maps.DirectionsService();
+        directionsDisplay = new google.maps.DirectionsRenderer({ map: map });
+    
+        distanceText = document.getElementById('distance');
+    
+        map.addListener('click', function (e) {
+            if (markers.length < 2) {
+                var marker = new google.maps.Marker({
+                    position: e.latLng,
+                    map: map
+                });
+    
+                markers.push(marker);
+    
+                if (markers.length === 2) {
+                    calculateAndDisplayRoute(markers[0].getPosition(), markers[1].getPosition());
+                }
+            } else {
+                alert('Ya has seleccionado dos puntos.');
+            }
+        });
+    }
+
     return (
         <>
             <NavBar />
 
-            <form className="d-flex m-2 p-2" style={{ borderBottom: '1px solid #aaa' }}>
-                <input className="form-control me-2" type="search" placeholder="Buscar calle" aria-label="Search" />
-                <button className="btn btn-outline-warning " type="submit">Buscar</button>
+            <form
+                className="d-flex m-2 p-2"
+                style={{ borderBottom: "1px solid #aaa" }}
+            >
+                <input
+                    className="form-control me-2"
+                    type="search"
+                    placeholder="Buscar calle"
+                    aria-label="Search"
+                />
+                <button className="btn btn-outline-warning " type="submit">
+                    Buscar
+                </button>
             </form>
-
-            <form action="">
-                <input id="origen" type="text" className="form-control me-2  border-0 border-bottom" 
-                placeholder="¿Dónde estás?"/>
-                <input id="destino" type="text" className="form-control me-2  border-0 border-bottom"
-                placeholder="¿Dónde quieres ir?"/>
+        <div className="container">
+        <form action="">
+                <input
+                    id="origen"
+                    type="text"
+                    className="form-control me-2  border-0 border-bottom"
+                    placeholder="¿Dónde estás?"
+                />
+                <input
+                    id="destino"
+                    type="text"
+                    className="form-control me-2  border-0 border-bottom"
+                    placeholder="¿Dónde quieres ir?"
+                />
                 <div id="map"></div>
 
-                <div className='d-flex justify-content-center'>
-                    <button style={{ display: "block" }} type="button" className="btn btn-warning m-2 text-light">Pedir remis</button>
-                </div>
+                
             </form>
+        </div>
+        <div className="container m-2">
+                    <div
+                        className=" border border-warning"
+                        style={{ width: "250px", height: "250px", margin: "auto" }}
+                        id="map"
+                    ></div>
+                </div>
+                <p>
+                    Distancia: <span id="distance">-</span>
+                </p>
+                <p>
+                    Total: <span id="cost">-</span>
+                </p>
 
-            <div className="row g-5 " style={{marginRight:'0px'}}>
+                <div className="d-flex justify-content-center">
+                    <button
+                        style={{ display: "block" }}
+                        type="button"
+                        className="btn btn-warning m-2 text-light"
+                    >
+                        Pedir remis
+                    </button>
+                </div>
 
-                <picture style={{ display: "inline-block", position: "relative" }} className="col-lg-6 d-flex justify-content-between">
+            <div className="row g-5 " style={{ marginRight: "0px" }}>
+                {/* <picture style={{ display: "inline-block", position: "relative" }} className="col-lg-6 d-flex justify-content-between">
                     <img style={{ width: "325px", height: "300px", marginBottom: "50px" }} src={mapaSVG} alt="" />
-                </picture>
+                </picture> */}
+
+                
 
                 <div className="col-md-5 col-lg-4 order-md-last ">
                     <h4 className="d-flex justify-content-between align-items-center mb-3">
@@ -48,7 +120,9 @@ export const InicioUser = () => {
                         <li className="list-group-item d-flex justify-content-between lh-sm">
                             <div>
                                 <h6 className="my-0">Destino</h6>
-                                <small className="text-body-secondary">Supermercado Caceres</small>
+                                <small className="text-body-secondary">
+                                    Supermercado Caceres
+                                </small>
                             </div>
                             <span className="text-body-secondary">$500</span>
                         </li>
@@ -74,15 +148,20 @@ export const InicioUser = () => {
 
                     <form className="card p-2">
                         <div className="input-group">
-                            <input type="text" className="form-control" placeholder="Promo code" />
-                            <button type="submit" className="btn btn-warning text-light">Canjear</button>
+                            <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Promo code"
+                            />
+                            <button type="submit" className="btn btn-warning text-light">
+                                Canjear
+                            </button>
                         </div>
                     </form>
                 </div>
-
             </div>
 
             <Footer />
         </>
-    )
-}
+    );
+};
