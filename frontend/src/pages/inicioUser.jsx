@@ -1,41 +1,39 @@
 import mapaSVG from "../assets/formosa.svg";
 import { NavBar } from "../components/navbar";
 import { Footer } from "../components/footer";
+import {GoogleMap, useLoadScript, Marker} from '@react-google-maps/api'
 
-export const InicioUser = () => {
-    var map;
-var markers = [];
+const libraries = ['places'];
+const mapContainerStyle = {
+    width: '100vw',
+    height: '100vh',
+};
+
+const center = {
+    lat: -26.1800403,
+    lng: -58.1869975,
+}
 
 
-     function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: { lat: 0, lng: 0 },
-            zoom: 2
-        });
-    
-        directionsService = new google.maps.DirectionsService();
-        directionsDisplay = new google.maps.DirectionsRenderer({ map: map });
-    
-        distanceText = document.getElementById('distance');
-    
-        map.addListener('click', function (e) {
-            if (markers.length < 2) {
-                var marker = new google.maps.Marker({
-                    position: e.latLng,
-                    map: map
-                });
-    
-                markers.push(marker);
-    
-                if (markers.length === 2) {
-                    calculateAndDisplayRoute(markers[0].getPosition(), markers[1].getPosition());
-                }
-            } else {
-                alert('Ya has seleccionado dos puntos.');
-            }
-        });
+
+
+export const InicioUser = (props) => {
+
+    const {isLoaded, loadError} = useLoadScript({
+        googleMapsApiKey: 'AIzaSyBIU9huG_veXQ68gdNzVaTD5HKRfK31uWo&callback',
+        libraries,
+    });
+
+
+    if(loadError){
+        return <div>Error loading maps</div>
     }
 
+    if(!isLoaded){
+        return <div>Loading maps</div>
+    }
+
+    
     return (
         <>
             <NavBar />
@@ -76,9 +74,17 @@ var markers = [];
         <div className="container m-2">
                     <div
                         className=" border border-warning"
-                        style={{ width: "250px", height: "250px", margin: "auto" }}
+                        style={{ width: "250px", height: "250px", margin: "auto", boxSizing: 'border-box', overflow:'hidden'}}
                         id="map"
-                    ></div>
+                    >
+                        <GoogleMap mapContainerStyle={mapContainerStyle}
+                        zoom={12}
+                        center={center}>
+                            {/* <Marker position={center}/> */}
+                            {/* {props.isMarkerShown && <Marker position={{lat: -34.397, lng: 150.644}}} */}
+                            {props.isMarkerShown && <Marker position={{ lat:-26.1800403, lng: -58.1869975 }} />}
+                        </GoogleMap>
+                    </div>
                 </div>
                 <p>
                     Distancia: <span id="distance">-</span>
@@ -160,7 +166,6 @@ var markers = [];
                     </form>
                 </div>
             </div>
-
             <Footer />
         </>
     );
