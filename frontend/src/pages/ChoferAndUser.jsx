@@ -1,12 +1,14 @@
-import io from "socket.io-client"; // Modulo de socket.io enfocado en aplicaciones de navegador
-import { useState, useEffect } from "react"; // Para crear estados
-import { Mapa } from "./mapa.jsx";
-import { Footer } from "./footer.jsx";
+import io from 'socket.io-client'   // Modulo de socket.io enfocado en aplicaciones de navegador
+import { useState, useEffect } from 'react'   // Para crear estados
+import { Mapa } from '../components/mapa';
+import { Footer } from '../components/footer.jsx';
 
 // Conexión con el backend
-const socket = io("/"); // Este socket permite recibir información del backend
+const socket = io("/")    // Este socket permite recibir información del backend
 
-function ChoferAndUser() {
+
+
+ function ChoferAndUser() {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
 
@@ -44,6 +46,7 @@ function ChoferAndUser() {
   const receiveMessage = (message) =>
     setMessages((state) => [...state, message]);
 
+
   return (
     <>
       <Mapa />
@@ -56,7 +59,7 @@ function ChoferAndUser() {
           <ul
             style={{
               width: "100%",
-              height: "300px",
+              height: "250px",
               zIndex: "2",
             }}
             className="m-0 p-2 overflow-y-auto"
@@ -106,4 +109,6 @@ function ChoferAndUser() {
   );
 }
 
-export default ChoferAndUser;
+
+
+export default ChoferAndUser

@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@react-google-maps/api": "^2.19.2",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
@@ -18,7 +19,9 @@
     "path": "^0.12.7",
     "pnpm": "^8.8.0",
     "sequelize": "^6.33.0",
-    "socket.io": "^4.7.2"
+    "socket.io": "^4.7.2",
+    "sweetalert2": "^11.7.32",
+    "use-places-autocomplete": "^4.0.1"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
