@@ -11,7 +11,7 @@ import { Signinuser } from '../components/sign.in.user.jsx'
 import { LoginUser } from '../components/login.user.jsx'
 import { LoginEmpresa } from '../components/login.empresa.jsx'
 import { createBrowserRouter} from "react-router-dom"
-import App from '../components/App.jsx'
+import ChoferAndUser from '../components/choferAndUser.jsx'
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -19,7 +19,7 @@ export const router = createBrowserRouter([
     },
     {
         path: "/choferuser",
-        element: <App />,
+        element: <ChoferAndUser />,
     },
     {
         path: "/empresa",
